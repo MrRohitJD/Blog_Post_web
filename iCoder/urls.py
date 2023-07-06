@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-# from django.contrib.staticfiles.urls import staticfiles_urlpatterns 
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +24,4 @@ urlpatterns = [
      path('blog/', include('Blog.urls')),
 
 ]
-# urlpatterns += staticfiles_urlpatterns() # new
+urlpatterns += staticfiles_urlpatterns() # new

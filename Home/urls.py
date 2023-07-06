@@ -18,6 +18,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from .import views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns 
 
 urlpatterns = [
      path('',views.home, name='home' ),
@@ -25,3 +26,4 @@ urlpatterns = [
      path('about/',views.about, name='about' ),
      path('search/',views.search, name='search' ),
 ]
+urlpatterns += staticfiles_urlpatterns() # new
