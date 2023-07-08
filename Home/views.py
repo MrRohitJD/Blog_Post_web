@@ -37,3 +37,5 @@ def contact(request):
             contact.save()
             messages.success(request, "you are query it's submitted successfullyand we will contact youas soon as possible..")
     return render(request, 'home/contact.html')
+
+
