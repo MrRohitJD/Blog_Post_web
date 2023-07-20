@@ -6,7 +6,7 @@
 <div class="container my-3 ">
   <article class="blog-post">
     <h2  class="display-5 link-body-emphasis mb-1"><b>{{posts.title}}</b></h2>
-    <p class="blog-post-meta">{{posts.timestamp}} <a href="/about"> {{posts.author}}</a></p>
+    <p class="blog-post-meta">{{posts.timestamp}} <a href="/about"> {{posts.author}}</a> (<span > {{posts.ViewsCount}} views</span>)</p>
 
     <hr>
     <h3>{{posts.head_0}}  </h3>
@@ -84,4 +84,3 @@
 {% endblock body%}
 
 
-{% block script %}{% endblock script %}

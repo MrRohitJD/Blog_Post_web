@@ -37,14 +37,14 @@
     <div class="container mb-4">
         <h3><b>Popular Blog Post</b></h3>
     </div>
-    {% for post in posts reversed %}
+    {% for post in top_posts %}
 <div class=" mt-4 my-2 .col-xxl-12">
     <div class="shadow-lg mb-5 bg-body-tertiary rounded">
         <div class="card mb-2">
             <div class="card-body">
                 <strong class="d-inline-block mb-2 text-primary">Article  by {{post.author}}</strong>
                 <h5 class="card-title">{{post.title}}</h5>
-                <p class="card-text">{{post.content_0| safe | slice:"0:230"}}<b>.......</b></p>
+                <p class="card-text"><div class="preview"> {{post.content_0| safe | slice:"0:230"}}<b>.......</b></div></p>
                     <p class="card-text"><small class="text-body-secondary"><a   href="/blog/{{post.slug}}" class="btn btn-link" style="text-decoration: none"><b>Continue Reading...</b></a><br>{{post.timestamp}}</small></p>
             </div>
         </div>
@@ -53,4 +53,15 @@
 {% endfor %}
 </div>
 {% endblock body%}
+
+{% block js %}
+    <script>
+        let previews=document.getElementsByClassName('preview');
+        Array.from(previews).forEach((element)=>{
+            element.innerHTML = element.innerText;
+        })
+    </script>
+        
+    
+{% endblock js %}
  

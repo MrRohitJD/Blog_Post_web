@@ -8,7 +8,9 @@ from django.contrib.auth import authenticate ,login , logout
 # Create your views here.
 def home(request):
     post =Post.objects.all()
-    context = {'posts': post}
+    top_posts = Post.objects.order_by('-ViewsCount')[:3]
+    print(top_posts)
+    context = {'posts': post, 'top_posts':top_posts}
     return render(request, 'home/home.html', context)
 
 
