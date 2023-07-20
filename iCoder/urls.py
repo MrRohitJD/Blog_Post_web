@@ -16,12 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-# from django.contrib.staticfiles.urls import staticfiles_urlpatterns 
 
+admin.site.site_header ="iCoder Admin"
+admin.site.site_title ="iCoder Admin Panel"
+admin.site.index_title ="iCoder Admin"
 urlpatterns = [
     path('admin/', admin.site.urls),
      path('', include('Home.urls')),
      path('blog/', include('Blog.urls')),
 
 ]
-# urlpatterns += staticfiles_urlpatterns() # new

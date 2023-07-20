@@ -1,5 +1,5 @@
 {% extends 'basic.html' %}
-
+{% include "home/home.html" with home_variable=home_context %}
 {% block title %}BlogHome{% endblock title %}
 {% block blogactive %}active{% endblock blogactive %}
 {% block body %}
@@ -7,15 +7,15 @@
     <h4><I><b>Popular Blocks By iCoder</b></I></h4>
 </div>
 
-{% for post in posts %}
+{% for post in posts reversed %}
 <div class="container mt-4 my-2 col-md-8">
     <div class="shadow-lg mb-5 bg-body-tertiary rounded">
         <div class="card mb-2">
             <div class="card-body">
                 <strong class="d-inline-block mb-2 text-primary">Article  by {{post.author}}</strong>
-                <h5 class="card-title">{{post.title}}</h5>
-                <p class="card-text">{{post.content_0|slice:"0:230"}}<b>.......</b></p>
-                    <p class="card-text"><small class="text-body-secondary"><a href="/blog/{{post.slug}}" class="btn btn-link"><b>Continue Reading...</b></a><br>{{post.timestamp}}</small></p>
+                <h5 class="mb-0"> <a class="text-dark" href="/blog/{{post.slug}}" style="text-decoration: none">{{post.title}}</a></h5>
+                <p class="card-text mt-2"> <a class="text-dark" href="/blog/{{post.slug}}" style="text-decoration: none">{{post.content_0 | safe |slice:"0:230"}}<b>.......</b></a></p>
+                    <p class="card-text"><small class="text-body-secondary"><a href="/blog/{{post.slug}}" class="btn btn-link" style="text-decoration: none"><b>Continue Reading...</b></a><br>{{post.timestamp}}</small></p>
             </div>
         </div>
     </div>
