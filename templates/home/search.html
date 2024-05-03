@@ -1,0 +1,41 @@
+{% extends 'basic.html' %}
+
+{% block title %}Search{% endblock title %}
+{% block blogactive %}active{% endblock blogactive %}
+{% block body %}
+{% for message in messages  %}
+<div style="background-color:#d3b840; color: white; padding: 10px;">
+    <strong>Alert:</strong> {{ message }}
+</div>
+{% endfor %}
+<div class="container mt-4 col-md-8">
+    <h4><I><b>Search result:</b></I></h4>
+    {% if allPost|length < 1 %}
+    <p>No search results</p>
+    Your search query : <b>{{query}}</b> did not match any documents. <br>
+    Suggestions:
+    <ul>
+    <li>Make sure that all words are spelled correctly.</li>
+    <li>Try more general keywords.</li>
+   <li> Try fewer keywords.</li>
+   <li> Try different keywords.</li>
+    </li>
+    </ul>
+    {% endif %}
+</div>
+
+{% for post in allPost %}
+<div class="container mt-4 my-2 col-md-8">
+    <div class="shadow-lg mb-5 bg-body-tertiary rounded">
+        <div class="card mb-2">
+            <div class="card-body">
+                <strong class="d-inline-block mb-2 text-primary">Article  by {{post.author}}</strong>
+                <h5 class="card-title">{{post.title}}</h5>
+                <p class="card-text">{{post.content_0|slice:"0:230"}}<b>.......</b></p>
+                    <p class="card-text"><small class="text-body-secondary"><a href="/blog/{{post.slug}}" class="btn btn-link"><b>Continue Reading...</b></a><br>{{post.timestamp}}</small></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock body%}

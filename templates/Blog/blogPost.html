@@ -1,0 +1,86 @@
+{% extends 'basic.html' %}
+
+{% block title %}BlogPost{% endblock title %}
+{% block body %}
+{% load humanize %}
+<div class="container my-3 ">
+  <article class="blog-post">
+    <h2  class="display-5 link-body-emphasis mb-1"><b>{{posts.title}}</b></h2>
+    <p class="blog-post-meta">{{posts.timestamp}} <a href="/about"> {{posts.author}}</a> (<span > {{posts.ViewsCount}} views</span>)</p>
+
+    <hr>
+    <h3>{{posts.head_0}}  </h3>
+    <p>{{posts.content_0 | safe}}</p>
+    <h2></h2>
+    <p></p>
+    <blockquote class="blockquote">
+      <p></p>
+    </blockquote>
+  </article>
+</div>
+
+<div class="container">
+  <h2>Comments ({{comments.count}})</h2>
+  {% if user.is_authenticated %}
+  <div class="row my-3">
+    <form action="/blog/postComment" method="post">{% csrf_token %}
+      <div class="mb-3">
+        <input class="form-control" name="comment" id="comment" type="text"
+          style="border-top: none; border-right: none; border-left: none; border-bottom: 1px solid black;"
+          placeholder="Write Comment ">
+        <input type="hidden" name="postSno" value="{{posts.sno}}">
+        <button type="submit" class="btn btn-primary float-end mt-3 me-3">Comment</button>
+        <button type="reset" class="btn btn-outline-primary float-end mt-3 me-2">Cancel</button>
+    </form>
+  </div>
+{% else %} 
+<form action="" >
+  <div class="mb-3">
+    <p style="color: red; font-size: small;">First LogIn to post a comment</p>
+    <input class="form-control" name="Xcomment" id="Xcomment" type="text"
+      style="border-top: none; border-right: none; border-left: none; border-bottom: 1px solid black;"
+      placeholder="Write Comment " disabled>
+    <input type="hidden" name="XpostSno" value="{{posts.sno}}">
+    <button type="submit" class="btn btn-primary float-end mt-3 me-3">Comment</button>
+    <button type="reset" class="btn btn-outline-primary float-end mt-3 me-2">Cancel</button>
+</form>
+{% endif %}
+
+
+  {% for comment in comments %}
+    <div class="row my-3">
+        <div class="col-md-1  ">
+        <img class="rounded mx-auto d-block w-100 p-2" src="/static/img/user.png"  alt="user">
+        </div>
+        <div class="col-md-11 "> 
+          {% comment %} <b> {{comment.user.username}} </b> <span class="badge badge-secondary ">{{comment.timestamp| naturaltime}}</span> {% endcomment %}
+        <b> {{comment.user.username}} </b> <span class="fw-light small px-3">{{comment.timestamp | naturaltime}}</span>
+        <div>   {{comment.comment}} </div>
+
+        {% comment %} Reply {% endcomment %}
+        <p>
+          <button class="btn  btn-sm  ms-3  btn-light collapsed mb-0 mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#replyBox{{comment.sno}}" aria-expanded="false" aria-controls="replyBox{{comment.sno}}">
+            Reply
+          </button>
+        </p>
+        <div class="collapse ms-3 col-sm-10 mb-0" id="replyBox{{comment.sno}}" style="">
+          <div class="card card-body">
+            <form action="/blog/postComment" method="post">{% csrf_token %}
+              <div class="mb-3">
+                <input class="form-control" name="comment" id="comment" type="text"
+                  style="border-top: none; border-right: none; border-left: none; border-bottom: 1px solid black;"
+                  placeholder="Write Reply ">
+                <input type="hidden" name="parantSno" value="{{comment.sno}}">
+                <input type="hidden" name="postSno" value="{{posts.sno}}">
+                <button type="submit" class="btn btn-primary float-end mt-3 me-3">Reply</button>
+            </form>
+          </div>
+        </div>
+    </div>
+    </div>
+    {% endfor %}
+
+</div>
+{% endblock body%}
+
+
