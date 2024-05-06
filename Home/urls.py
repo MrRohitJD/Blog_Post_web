@@ -27,5 +27,5 @@ urlpatterns = [
      path('signup/',views.handleSign, name='handleSign' ),
      path('login/', views.handleLogIn, name='handleLogIn'),
      path('logout/', views.HandleLogOut, name='handleLogout'),
-     path('blog/', include('Blog.urls')),
+     path('/blog/', include('Blog.urls')),
 ]
