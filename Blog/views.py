@@ -11,7 +11,7 @@ def blogHome(request):
     post =Post.objects.all()
     print(post)
     context = {'posts': post}
-    return render(request, '/blog/bloghome.html', context)
+    return render(request, 'blog/bloghome.html', context)
 
 def blogPost(request, slug):
     post = Post.objects.filter(slug =slug).first()
@@ -21,7 +21,7 @@ def blogPost(request, slug):
     print(post.ViewsCount)
     comments= BlogComment.objects.filter(post=post)
     context = {'posts':post, 'comments':comments}
-    return render(request, '/blog/blogPost.html', context )
+    return render(request, 'blog/blogPost.html', context )
 
 
 def postComment(request):
